@@ -1,5 +1,6 @@
 
 from urllib2 import Request, urlopen, URLError
+from urllib import urlencode
 
 key = 'c90a5d66f14103ee60fa88338ed9ebf2'
 
@@ -43,8 +44,8 @@ def saleSnapshot(postalCode, minSaleAmount, maxSaleAmount, startDate, endDate):
 	response = "https://search.onboard-apis.com/propertyapi/v1.0.0/sale/snapshot?postalcode=%s&minsaleamt=%s&maxsaleamt=%s&startsalesearchdate=%s&endsalesearchdate=%s"
 	return get(response)
 
-#mutable request
-
+#mutable request- can use (almost) any available 'advanced' search parameters for the property resource in Onboard's API
+#available parameters shown on keyList, explanations available through Onboard's docs.
 def propertyDetailMutable(d = {}):
 	#list of acceptable key names for d
 	keyList = ['minSaleAmt','maxSaleAmt', 'minTaxAmt','maxTaxAmt','minApprTtlValue','maxApprTtlValue',
@@ -52,24 +53,15 @@ def propertyDetailMutable(d = {}):
 		'endSaleTransDate','lotSize1', 'lotSize2', 'minMktLandValue', 'maxMktLandValue','minMktTtlValue', 
 		'maxMktTtlValue', 'GeoID', 'ID', 'postalCode', 'address', 'startSaleSearchDate', 'endSaleSearchDate', 
 		'propertyType', 'minBathsTotal', 'maxBathsTotal','minBeds', 'maxBeds','universalSize']
+	# need to throw an error if unacceptable key
+	for k in d.keys():
+		if k not in keyList:
+			print k
+			d.pop(k)
 
-	#check d's key names against keyList to make sure you don't break shit
-
-
-	#replace spaces in string values with %20
-
-
-	#iterates through keys to add values to the search parameter
-
-	string = ""
-	i = 1
-	for k in d:
-		string += "%s=%s" % (k, d[k])
-		if i < len(d) : string += "&"
-		i += 1
-
+	#urlencode is pretty dope tbh
+	#encode response to HTTPS call
+	string = urlencode(d)
 	response = "https://search.onboard-apis.com/propertyapi/v1.0.0/property/detail?%s" % string
-	return response
+	return get(response)
 
-print propertyDetailMutable(d = {'minSaleAmt' : 100000, 'maxSaleAmt' : 500000, 'cityName' : "Burlingame"})
-print propertyId()
