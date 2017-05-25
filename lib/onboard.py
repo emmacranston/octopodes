@@ -53,15 +53,17 @@ def propertyDetailMutable(d = {}):
 		'endSaleTransDate','lotSize1', 'lotSize2', 'minMktLandValue', 'maxMktLandValue','minMktTtlValue', 
 		'maxMktTtlValue', 'GeoID', 'ID', 'postalCode', 'address', 'startSaleSearchDate', 'endSaleSearchDate', 
 		'propertyType', 'minBathsTotal', 'maxBathsTotal','minBeds', 'maxBeds','universalSize']
-	# need to throw an error if unacceptable key
+
+	# possible to do more efficiently than worst-case O(n^2)?
+	# remove unacceptable keys
 	for k in d.keys():
 		if k not in keyList:
-			print k
+			print "Parameter Removed: '%s'" % k
 			d.pop(k)
 
 	#urlencode is pretty dope tbh
 	#encode response to HTTPS call
-	string = urlencode(d)
-	response = "https://search.onboard-apis.com/propertyapi/v1.0.0/property/detail?%s" % string
+	string = "?" + urlencode(d)
+	response = "https://search.onboard-apis.com/propertyapi/v1.0.0/property/detail%s" % string
 	return get(response)
 
