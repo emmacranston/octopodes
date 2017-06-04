@@ -4,9 +4,8 @@ from urllib import urlencode
 
 class onboardClient():
 	def __init__(self, token):
-		self.token = token
-		if token == "":
-			raise valueError
+		if token: self._token = token
+		else: raise ValueError("No token entered")
 
 	def __get(self, url):
 		request = Request(url, headers={"Accept": "application/json", "apikey" : self.token})

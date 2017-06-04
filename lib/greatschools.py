@@ -13,6 +13,7 @@ class greatschoolsClient():
 		contents = urlopen(request).read()
 		return contents
 
+#parameter debugging checks: need work
 	def checkLevelParameter(self, string):
 		levelList = ["elementary-schools", "middle-schools", "high-schools"]
 		if string not in levelList:
@@ -22,6 +23,7 @@ class greatschoolsClient():
 		schoolTypeList = ["public", "charter", "private"]
 		# also allowed are any items in the list separated by hyphens; gonna come back to this one later
 
+#these methods will return only the HTTP response; need to decode from XML to be legible
 	def schoolsBrowse(self, state = "CA", city = "San Francisco", schoolType = "", level = ""):
 		#make sure parameters for schoolType and level make sense
 		checkLevelParameter(level)
@@ -51,3 +53,4 @@ class greatschoolsClient():
 		params = "&" + urlencode(d)
 		request = "http://api.greatschools.org/schools/nearby?key=%s%s" % (self._token, params)
 		return request
+		#return self.__get(request)
