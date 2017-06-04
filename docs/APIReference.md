@@ -7,8 +7,8 @@ API Reference
 	methods defined are not all-inclusive of every available API call, but instead represent what may be necessary for this project.
 
 *	__get  
-	parameters: url 
-	Private method that returns an urllib2 request to the url. Simple.
+	**Parameters**: url  
+	**Description**: Private method that returns an urllib2 request to the url. Simple.
 *	propertyId
 *	propertyDetail
 *	propertyZip
