@@ -30,5 +30,3 @@ class zillowClient():
 
 		url = "http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=%s&state=%s&%s" % (auth, state, dictvals)
 		return self.__get(url)
-
-	def 
