@@ -1,4 +1,4 @@
-from apis import onboard, greatschools, zillow
+import apis
 class dataScript():
 	def __init__(self, onboardKey, zillowKey, greatSchoolsKey):
 		onboardClient = onboard.onboardClient(onboardKey)
