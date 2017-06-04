@@ -2,7 +2,7 @@
 from urllib2 import Request, urlopen, URLError
 from urllib import urlencode
 
-class zendeskClient():
+class zillowClient():
 	#instantiate and define get method
 	def __init__(self, key):
 		if key: self._key = key
@@ -13,6 +13,7 @@ class zendeskClient():
 
 		return contents
 
+	#gets neighborhood info
 	def getRegionChildren(self, state="CA", d= {}):
 		auth = self._key
 
@@ -30,6 +31,4 @@ class zendeskClient():
 		url = "http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=%s&state=%s&%s" % (auth, state, dictvals)
 		return self.__get(url)
 
-zc = zendeskClient("X1-ZWz1970nt3o1l7_af1tq")
-print zc.getRegionChildren(d={"county": "San Mateo", "childtype": "zipcode"})
-
+	def 

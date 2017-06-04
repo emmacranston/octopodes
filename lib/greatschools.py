@@ -21,6 +21,8 @@ class greatschoolsClient():
 
 	def checkSchoolTypeParameter(self, string):
 		schoolTypeList = ["public", "charter", "private"]
+		if string not in levelList:
+			raise ValueError("Please use one of public, charter, or private in 'schoolType' parameter.")
 		# also allowed are any items in the list separated by hyphens; gonna come back to this one later
 
 #these methods will return only the HTTP response; need to decode from XML to be legible
@@ -38,8 +40,7 @@ class greatschoolsClient():
 
 		#put together request url
 		request = "http://api.greatschools.org/schools/%s/%s?key=%s" % (s, c, self._token)
-		return request
-		#return self.__get(request)
+		return self.__get(request)
 
 	def schoolsNearby(self, state, d = {}):
 		#define allowable key values for d
@@ -52,5 +53,4 @@ class greatschoolsClient():
 		#for some reason in this endpoint you can urlencode as per usual
 		params = "&" + urlencode(d)
 		request = "http://api.greatschools.org/schools/nearby?key=%s%s" % (self._token, params)
-		return request
-		#return self.__get(request)
+		return self.__get(request)
